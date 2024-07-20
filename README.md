@@ -20,11 +20,11 @@ The video in question can be found [here](https://www.youtube.com/watch?v=pv9nle
 A more recent and higher-quality version of the same recording can be found [here](https://www.youtube.com/watch?v=DaWcL3oOd-E).
 
 In the video, the viewer is presented with a sort of test that they can actively participate in.
-They can see a 3x3 grid of multiple post-it notes that have been stuck to a transparent surface.
+They can see a 3x3 grid of post-it notes that have been stuck to a transparent surface.
 Each of these post-its has a different symbol drawn on them, but that seems to be of no greater relevance
 to the game.
 The narrator of the video then explains the rules of the test:
-* the viewers always need to have their finger on the screen, pointing at a single of the visible notes
+* the viewer always needs to have their finger on the screen, pointing at one of the visible notes
 (which shall from here on out be referred to as 'fields')
 * they have to start on the field in the upper right corner that reads 'start'
 * during the game, when prompted to move by the narrator, the viewer can move their finger
@@ -33,17 +33,17 @@ to any neighboring field that is directly above, below, right or left of the cur
 * it is allowed to move to fields that have already been visited before
 
 At this point the test starts.
-The viewer is told to make a single once, placing them on one of two possible fields.
+The viewer is told to make a single move, placing them on one of two possible fields.
 The narrator then removes the starting field, so that it is no longer a selectable option.
 The game then continues for several more cycles.
-During each cycle, the viewers are prompted to move their finger a specific number of times,
+During each cycle, the viewer is prompted to move their finger a specific number of times,
 after which one of the fields that are still available is removed.
 This will eventually end with only 1 field being left.
 
-The claim made by the narrator here is that, no matter which choices the viewers make, as long as
+The claim made by the narrator here is that, no matter which choices the viewer makes, as long as
 they play by the established rules, he can reliably predict which fields are **not** selected
 at the end of each cycle when he decides to remove one of them.
-The end result is expected to be that all viewers should end up on that last remaining field.
+The end result is expected to be that the viewer should end up on that last remaining field.
 
 ## So what is being proven or disproven here and why?
 I was motivated to write this because I checked the comments on the newer of the two videos,
@@ -142,19 +142,27 @@ and 1 means 'this is a possible starting field'
 * **number of moves** a positive integer that represents the number of moves that have to be made from
 any starting field
 
+The program will then simulate moving sequences, using the specified parameters and exploring all possible combination of starting conditions and choices.
+At the end, it will print out a 3x3 grid, which expresses which fields can or cannot be the last occupied field at the end of a moving sequence.
+An execution of the program can only simulate one stage of the game (stages are separated by the removal of fields).
+To simulate all stages in succession, using the results of the prior for the next stage, one has to interpret the output at the end of a stage and turn it into the appropriate input for the next program execution that will then simulate the next stage.
+
 **Example:**
 
 Input: ``111011010 100000010 1``
 
 Output:
 ```
-_ unavailable field
-X used as final field
-O never used as final field
-
 OXO
 _XO
 _O_
+```
+
+Symbol explanation:
+```
+_ unavailable field
+X field that can be occupied at the end of the sequence
+O field that can never be occupied at the end of the sequence
 ```
 
 ## Verifying 'The Prediction'
@@ -248,5 +256,4 @@ _OX
 
 ## Conclusion
 'The Prediction' is indeed correct in all possible cases and anyone who got a different result
-while following the video is a fucking idiot who apparently is too incapable to follow
-simple instructions.
+while following the video apparently either made a mistake or was dishonest.
